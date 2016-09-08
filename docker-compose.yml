@@ -1,0 +1,26 @@
+knowledge_psql_data:
+  image: tianon/sleeping-beauty:latest
+  volumes:
+    - ./data/psql:/var/lib/postgresql/data
+knowledge_data:
+  image: tianon/sleeping-beauty:latest
+  volumes:
+    - ./data/knowledge:/root/.knowledge
+knowledge_psql:
+  image: postgres:9.5
+  environment:
+    POSTGRES_USER: knowledge
+    POSTGRES_PASSWORD: password
+    POSTGRES_DB: knowledgebase
+  ports:
+    - "5432:5432"
+  volumes_from:
+    - knowledge_psql_data
+knowledge:
+  build: ./knowledge_docker
+  links:
+    - knowledge_psql:knowledge_psql
+  ports:
+    - "5000:8080"
+  volumes_from:
+    - knowledge_data
