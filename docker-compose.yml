@@ -1,12 +1,12 @@
-knowledge_psql_data:
+psql_data:
   image: tianon/sleeping-beauty:latest
   volumes:
     - ./data/psql:/var/lib/postgresql/data
-knowledge_data:
+data:
   image: tianon/sleeping-beauty:latest
   volumes:
     - ./data/knowledge:/root/.knowledge
-knowledge_psql:
+psql:
   image: postgres:9.5
   environment:
     POSTGRES_USER: knowledge
