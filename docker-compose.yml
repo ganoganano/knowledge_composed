@@ -7,8 +7,6 @@ psql:
     POSTGRES_DB: knowledgebase
   ports:
     - "5432:5432"
-  volumes_from:
-    - psql_data
 knowledge:
   image: koda/docker-knowledge
   links:
