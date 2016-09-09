@@ -18,7 +18,7 @@ knowledge:
     volumes_from:
       - psql_data
   knowledge:
-    build: ./knowledge_docker
+    image: koda/docker-knowledge
     links:
       - psql:psql
     ports:
