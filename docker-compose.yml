@@ -1,27 +1,29 @@
+
+psql_data:
+  image: tianon/sleeping-beauty:latest
+  volumes:
+    - /var/lib/postgresql/data
+data:
+  image: tianon/sleeping-beauty:latest
+  volumes:
+    - /root/.knowledge
+psql:
+  image: postgres:9.5
+  environment:
+    POSTGRES_USER: knowledge
+    POSTGRES_PASSWORD: password
+    POSTGRES_DB: knowledgebase
+  ports:
+    - "5432:5432"
+  volumes_from:
+    - psql_data
 knowledge:
-  psql_data:
-    image: tianon/sleeping-beauty:latest
-    volumes:
-      - /var/lib/postgresql/data
-  data:
-    image: tianon/sleeping-beauty:latest
-    volumes:
-      - /root/.knowledge
-  psql:
-    image: postgres:9.5
-    environment:
-      POSTGRES_USER: knowledge
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: knowledgebase
-    ports:
-      - "5432:5432"
-    volumes_from:
-      - psql_data
-  knowledge:
-    image: koda/docker-knowledge
-    links:
-      - psql:psql
-    ports:
-      - "5000:8080"
-    volumes_from:
-      - data
+  image: koda/docker-knowledge
+  links:
+    - psql:psql
+  expose:
+    - "5000"
+  ports:
+    - "5000:8080"
+  volumes_from:
+    - data
