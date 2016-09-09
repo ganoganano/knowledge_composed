@@ -23,4 +23,4 @@ knowledge:
   ports:
     - "5000:8080"
   volumes_from:
-    - knowledge_data
+    - data
