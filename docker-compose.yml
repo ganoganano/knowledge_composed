@@ -1,11 +1,11 @@
 psql_data:
   image: tianon/sleeping-beauty:latest
   volumes:
-    - ./data/psql:/var/lib/postgresql/data
+    - /data/psql:/var/lib/postgresql/data
 data:
   image: tianon/sleeping-beauty:latest
   volumes:
-    - ./data/knowledge:/root/.knowledge
+    - /data/knowledge:/root/.knowledge
 psql:
   image: postgres:9.5
   environment:
